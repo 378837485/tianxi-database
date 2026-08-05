@@ -41,7 +41,7 @@ DATA_DIRS = ["horses", "entries", "trials", "results", "jockeys", "trainers", "d
 LAST_SYNC_FILE = "last_sync.json"
 GIT_USER_NAME = "天喜 Bot"
 GIT_USER_EMAIL = "bot@tianxi.ai"
-REPO_PATH = "378837485/hkjc-horse-racing-results"  # owner/name on GitHub
+REPO_PATH = "378837485/tianxi-database"  # owner/name on GitHub
 RETRY_DELAYS = [5, 15, 45]
 
 
