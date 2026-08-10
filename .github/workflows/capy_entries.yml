@@ -10,7 +10,13 @@ on:
   schedule:
     # HK 20:00 Mon,Tue,Sat = UTC 12:00 Mon,Tue,Sat
     - cron: '0 12 * * 1,2,6'
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      date:
+        description: '抓取日期 (YYYY-MM-DD)，留空则自动判断'
+        required: false
+        default: ''
+        type: string
 
 permissions:
   contents: write
@@ -60,7 +66,12 @@ jobs:
 
       - name: Run entries scraper
         if: steps.guard.outputs.run == 'true'
-        run: python EntryList_Scraper.py
+        run: |
+          if [ -z "${{ github.event.inputs.date }}" ]; then
+            python EntryList_Scraper.py
+          else
+            python EntryList_Scraper.py --date ${{ github.event.inputs.date }}
+          fi
 
       - name: Push entries to main
         if: steps.guard.outputs.run == 'true'
